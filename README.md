@@ -272,6 +272,12 @@ If a channel env var is removed, that channel is cleaned from config on next sta
 | `MOONSHOT_BASE_URL` | Override Moonshot API base URL. Default: `https://api.moonshot.ai/v1`. |
 | `KIMI_BASE_URL` | Override Kimi Coding API base URL. Default: `https://api.moonshot.ai/anthropic`. |
 
+### Extra system packages (optional)
+
+| Variable | Description |
+|---|---|
+| `OPENCLAW_DOCKER_APT_PACKAGES` | Space-separated list of apt packages to install at container startup (e.g. `ffmpeg build-essential`). Packages are installed before openclaw starts. Reinstalled on each container restart. |
+
 ### Port
 
 | Variable | Default | Description |

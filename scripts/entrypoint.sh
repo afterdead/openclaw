@@ -8,6 +8,15 @@ GATEWAY_PORT="${OPENCLAW_GATEWAY_PORT:-18789}"
 echo "[entrypoint] state dir: $STATE_DIR"
 echo "[entrypoint] workspace dir: $WORKSPACE_DIR"
 
+# ── Install extra apt packages (if requested) ────────────────────────────────
+if [ -n "${OPENCLAW_DOCKER_APT_PACKAGES:-}" ]; then
+  echo "[entrypoint] installing extra packages: $OPENCLAW_DOCKER_APT_PACKAGES"
+  apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+      $OPENCLAW_DOCKER_APT_PACKAGES \
+    && rm -rf /var/lib/apt/lists/*
+fi
+
 # ── Require OPENCLAW_GATEWAY_TOKEN ───────────────────────────────────────────
 if [ -z "${OPENCLAW_GATEWAY_TOKEN:-}" ]; then
   echo "[entrypoint] ERROR: OPENCLAW_GATEWAY_TOKEN is required."
